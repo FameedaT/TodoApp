@@ -27,9 +27,10 @@ angular.module("todoApp", [])
         $scope.delete = function (item) {
             var index = $scope.todos.indexOf(item);
             $scope.todos.splice(index, 1);
+            $scope.$setPristine();
         };
 
-        $scope.clearAll = function () {
+        $scope.clearSubmitted = function () {
             var length = $scope.todos.length;
             for (var index = length - 1; index >= 0; index--) {
                 if (this.todos[index].completed === true) {
