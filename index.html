@@ -3,36 +3,66 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>TODO App</title>
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Bootstrap theme css -->
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <!-- Custom css -->
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        body {
+            padding: 50px;
+        }
+    </style>
 </head>
-<body>
+<body ng-app="todoApp">
 
-<div ng-app="todoApp">
-    <h1> Todo App</h1>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-center"> TODO APP</h1>
+    </div>
+</div>
 
-    <div ng-controller="MainCtrl">
-        <div>
-            <input type="text" placeholder="Enter Todo" ng-model="newTodo.text">
-            <input type="hidden" ng-model="newTodo.completed">
-            <button ng-click="add()">Add</button>
+<div class="container" ng-controller="MainCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <form ng-submit="add()" name="form">
+                <input type="text" placeholder="Enter Todo" ng-model="newTodo.text" name="text" ng-minlength="5"
+                       required>
+                <input type="hidden" ng-model="newTodo.completed" value="false">&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="Add" class="btn btn-primary" ng-disabled="form.$invalid">
+            </form>
+            <span ng-show="form.text.$error.minlength && form.text.$touched" class="errorText">
+                Please enter atleast 5 characters
+            </span>
         </div>
+    </div>
+    <br>
 
-        <div ng-repeat="item in todos">
-            <div>
-                <input type="checkbox" ng-model="item.completed">
-                <span ng-bind="item.text"></span>
-                <button ng-click="delete(item)">x</button>
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-repeat="item in todos">
+                <div>
+                    <input type="checkbox" ng-model="item.completed" title="Completed">&nbsp;
+                    <span ng-bind="item.text" ng-class="{'completed':item.completed}"></span>&nbsp;&nbsp;&nbsp;
+                    <button ng-click="delete(item)">Delete</button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <br><br>
+    <br><br>
 
-        <div>
-            <button ng-click="clearAll()"> Clear Completed</button>
+
+    <div class="row">
+        <div class="col-md-12">
+                <input type="button" value="Clear Completed" ng-click="clearSubmitted()" class="btn btn-primary">
         </div>
     </div>
 </div>
 
 <script src="lib/angular.min.js"></script>
+<script src="scripts/ui-bootstrap-tpls-0.12.0.min.js"></script>
 <script src="scripts/app.js"></script>
 </body>
 </html>
