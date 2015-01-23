@@ -5,4 +5,6 @@
 <h3>URL</h3>
 The application is hosted at http://fameedat.github.io/TodoApp/
 
+<h3>Screenshot</h3>
+<img src="/screenshots/screenshot.png">
 
